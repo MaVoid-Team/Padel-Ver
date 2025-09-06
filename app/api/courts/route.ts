@@ -2,6 +2,10 @@ import { NextResponse } from "next/server"
 import { getDatabase } from "@/lib/mongodb"
 import type { Court } from "@/lib/models/Court"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export async function GET() {
   try {
     const db = await getDatabase()

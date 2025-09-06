@@ -3,6 +3,10 @@ import { getDatabase } from "@/lib/mongodb"
 import type { Booking, BookingRequest } from "@/lib/models/Booking"
 import { ObjectId } from "mongodb"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export async function POST(request: Request) {
   try {
     const body: BookingRequest = await request.json()

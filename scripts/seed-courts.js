@@ -1,5 +1,9 @@
 // Script to seed initial courts data
 import { MongoClient } from "mongodb"
+import dotenv from "dotenv"
+
+// Load environment variables
+dotenv.config()
 
 const uri = process.env.MONGODB_URI || "mongodb://localhost:27017"
 const client = new MongoClient(uri)

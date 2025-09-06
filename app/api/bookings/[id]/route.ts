@@ -3,6 +3,10 @@ import { getDatabase } from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 import type { Booking } from "@/lib/models/Booking"
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 export async function PATCH(request: Request, { params }: { params: { id: string } }) {
   try {
     const body = await request.json()

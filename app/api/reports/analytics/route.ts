@@ -1,6 +1,11 @@
+
 import { NextResponse } from "next/server"
 import { getDatabase } from "@/lib/mongodb"
 import type { Booking } from "@/lib/models/Booking"
+
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function GET(request: Request) {
   try {

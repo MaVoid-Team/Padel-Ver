@@ -24,8 +24,13 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install only production dependencies
-RUN npm ci --only=production --omit=optional --force
+RUN npm ci --only=production --force
 
 # Copy built application from build stage
 COPY --from=build /app/build ./build

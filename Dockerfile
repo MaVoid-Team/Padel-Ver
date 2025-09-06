@@ -1,5 +1,5 @@
 # Build stage
-FROM node:25 as build
+FROM node:25 AS build
 
 # Set working directory
 WORKDIR /app
@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Production stage - Run Next.js server
-FROM node:25 as production
+FROM node:25 AS production
 
 WORKDIR /app
 

@@ -9,7 +9,7 @@ export async function PATCH(request: Request, { params }: { params: { id: string
     const db = await getDatabase()
 
     const result = await db.collection<Booking>("bookings").updateOne(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(params.id) } as any,
       {
         $set: {
           status: body.status,
@@ -35,7 +35,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 
     const result = await db.collection<Booking>("bookings").deleteOne({
       _id: new ObjectId(params.id),
-    })
+    } as any)
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: "Booking not found" }, { status: 404 })

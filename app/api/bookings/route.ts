@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     }
 
     // Get court details for pricing
-    const court = await db.collection("courts").findOne({ _id: new ObjectId(body.courtId) })
+    const court = await db.collection("courts").findOne({ _id: new ObjectId(body.courtId) } as any)
     if (!court) {
       return NextResponse.json({ error: "Court not found" }, { status: 404 })
     }

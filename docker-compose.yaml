@@ -1,0 +1,28 @@
+services:
+  padel:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "3964:3000"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8474:80"
+      - "4548:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - padel
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

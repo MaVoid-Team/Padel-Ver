@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    unoptimized: true,
+    loader: 'custom',
+    loaderFile: './image-loader.js'
   },
-  distDir: "build",
+  output: "export",
+
+  basePath: "/Padel-Ver",
+  assetPrefix: "/Padel-Ver/",
 
 }
 

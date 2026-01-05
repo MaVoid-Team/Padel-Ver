@@ -1,0 +1,2 @@
+# Ignore lockfile from npm so Vercel uses pnpm-lock.yaml
+package-lock.json

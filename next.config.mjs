@@ -1,13 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    loader: 'custom',
-    loaderFile: './image-loader.js'
-  },
-  output: "export",
+  // images: {
+  //   loader: 'custom',
+  //   loaderFile: './image-loader.js'
+  // },
+  // output: "export",
 
-  basePath: "/Padel-Ver",
-  assetPrefix: "/Padel-Ver/",
+  // basePath: "/Padel-Ver",
+  // assetPrefix: "/Padel-Ver/",
+
+  images: {
+    unoptimized: true,
+  },
 
 }
 

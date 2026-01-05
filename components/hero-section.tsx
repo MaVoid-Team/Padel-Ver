@@ -12,7 +12,7 @@ export function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute top-0 left-0 w-full h-full bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/professional-padel-court-with-glass-walls-and-led-.jpg')",
         }}

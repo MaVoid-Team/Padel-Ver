@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         {process.env.MONGODB_URI ? null : (
-          <div className="w-full bg-yellow-50 border-b border-yellow-200 text-yellow-900 py-2 text-center text-sm">
+          <div className="w-full bg-yellow-50 border-b border-yellow-200 text-yellow-900 py-2 text-center text-sm z-60">
             <strong>Warning:</strong> MONGODB_URI is not set — database features are disabled. You can still view the UI but some features will be disabled until you set the environment variables.
           </div>
         )}

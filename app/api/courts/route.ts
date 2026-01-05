@@ -8,6 +8,10 @@ export const runtime = 'nodejs'
 
 export async function GET() {
   try {
+    if (!isMongoConfigured) {
+      return NextResponse.json({ error: "MongoDB not configured" }, { status: 503 })
+    }
+
     const db = await getDatabase()
     const courts = await db.collection<Court>("courts").find({ isActive: true }).toArray()
 

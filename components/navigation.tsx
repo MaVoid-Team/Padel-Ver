@@ -1,12 +1,27 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Calendar, Settings, User } from "lucide-react"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [mongoOk, setMongoOk] = useState<boolean | null>(null)
+
+  // Fetch health status on mount
+  useEffect(() => {
+    let cancelled = false
+    fetch('/api/health')
+      .then((res) => res.json())
+      .then((data) => {
+        if (!cancelled) setMongoOk(Boolean(data?.mongoConfigured))
+      })
+      .catch(() => {
+        if (!cancelled) setMongoOk(false)
+      })
+    return () => { cancelled = true }
+  }, [])
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
@@ -31,6 +46,12 @@ export function Navigation() {
             <Link href="/admin" className="text-foreground hover:text-primary transition-colors">
               Admin
             </Link>
+            {mongoOk === false && (
+              <div className="ml-4 inline-flex items-center gap-2 rounded-md bg-yellow-50 px-2 py-0.5 text-yellow-800 text-xs">
+                <svg width="10" height="10" viewBox="0 0 24 24" className="text-yellow-600" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 9v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M12 17h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                DB disabled
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getDatabase } from "@/lib/mongodb"
+import { getDatabase, isMongoConfigured } from "@/lib/mongodb"
 import type { Booking, BookingRequest } from "@/lib/models/Booking"
 import { ObjectId } from "mongodb"
 
@@ -9,6 +9,10 @@ export const runtime = 'nodejs'
 
 export async function POST(request: Request) {
   try {
+    if (!isMongoConfigured) {
+      return NextResponse.json({ error: "MongoDB not configured" }, { status: 503 })
+    }
+
     const body: BookingRequest = await request.json()
     const db = await getDatabase()
 

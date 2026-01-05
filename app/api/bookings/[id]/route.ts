@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getDatabase } from "@/lib/mongodb"
+import { getDatabase, isMongoConfigured } from "@/lib/mongodb"
 import { ObjectId } from "mongodb"
 import type { Booking } from "@/lib/models/Booking"
 
@@ -9,6 +9,10 @@ export const runtime = 'nodejs'
 
 export async function PATCH(request: Request, { params }: { params: { id: string } }) {
   try {
+    if (!isMongoConfigured) {
+      return NextResponse.json({ error: "MongoDB not configured" }, { status: 503 })
+    }
+
     const body = await request.json()
     const db = await getDatabase()
 
@@ -35,6 +39,10 @@ export async function PATCH(request: Request, { params }: { params: { id: string
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
+    if (!isMongoConfigured) {
+      return NextResponse.json({ error: "MongoDB not configured" }, { status: 503 })
+    }
+
     const db = await getDatabase()
 
     const result = await db.collection<Booking>("bookings").deleteOne({

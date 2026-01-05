@@ -5,6 +5,10 @@ import dotenv from "dotenv"
 // Load environment variables
 dotenv.config()
 
+if (!process.env.MONGODB_URI) {
+  console.warn('MONGODB_URI not set — using fallback mongodb://localhost:27017. Seed script will target local MongoDB.')
+}
+
 const uri = process.env.MONGODB_URI || "mongodb://localhost:27017"
 const client = new MongoClient(uri)
 

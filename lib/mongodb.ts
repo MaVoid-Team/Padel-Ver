@@ -1,6 +1,7 @@
 import { MongoClient, type Db } from "mongodb"
 
 const uri = process.env.MONGODB_URI
+export const isMongoConfigured = Boolean(uri)
 const options = {}
 
 let client: MongoClient

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getDatabase } from "@/lib/mongodb"
+import { getDatabase, isMongoConfigured } from "@/lib/mongodb"
 import type { Booking } from "@/lib/models/Booking"
 
 // Force dynamic rendering
@@ -8,6 +8,10 @@ export const runtime = 'nodejs'
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
   try {
+    if (!isMongoConfigured) {
+      return NextResponse.json({ error: "MongoDB not configured" }, { status: 503 })
+    }
+
     const { searchParams } = new URL(request.url)
     const date = searchParams.get("date")
 

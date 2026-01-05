@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getDatabase } from "@/lib/mongodb"
+import { getDatabase, isMongoConfigured } from "@/lib/mongodb"
 import type { Court } from "@/lib/models/Court"
 
 // Force dynamic rendering
@@ -20,6 +20,10 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    if (!isMongoConfigured) {
+      return NextResponse.json({ error: "MongoDB not configured" }, { status: 503 })
+    }
+
     const body = await request.json()
     const db = await getDatabase()
 
